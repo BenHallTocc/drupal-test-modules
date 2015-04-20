@@ -1,0 +1,9 @@
+name = TOCC Tiles
+description = Provides a configurable gallery of image 'tiles' with information overlay
+package = Custom/Test
+core = 7.x
+version = "7.x-0.x-dev"
+configure = admin/config/tocc_tiles
+
+files[] = tocc_tiles.module
+files[] = tocc_tiles.admin.inc
