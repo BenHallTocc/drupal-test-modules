@@ -1,0 +1,27 @@
+/**
+ * The Original Cottage Company (TOCC) 
+ *  
+ * @title       Web style guide 
+ * @author      Ben Hall (b.hall@tocc.co.uk)
+ * @document    TOCC Tiles style sheet
+ * @description TOCC Tiles style sheet
+ */
+
+@import 'variables.less';
+@import 'mixins.less';
+
+/**
+ * Box sizing ftw
+ */
+.tile-block,
+.tile-block:before,
+.tile-block:after,
+.tile-block * {
+    .box-sizing();
+}
+
+.tile {
+    .box(360px, 250px);
+    position: relative;
+    overflow: hidden;
+}

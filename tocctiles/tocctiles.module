@@ -10,35 +10,47 @@ require_once dirname(__FILE__) . '/tocctiles.taxonomy.inc';
  * @return array
  */
 function tocctiles_menu()
-{
-    $items = array();
-    
+{   
     $items['admin/config/tocc/tocctiles'] = array(
+        'title' => t('TOCC Tiles'),
+        'description' => t('Configuration for the module containing the block of image Tiles'),
+        'page callback' => 'system_admin_menu_block_page',
+        'access arguments' => array('administer site configuration'),
+        'file' => 'system.admin.inc',
+        'file path' => drupal_get_path('module', 'system'),
+    );
+            
+    $items['admin/config/tocc/tocctiles/settings'] = array(
+        'title' => t('TOCC Tiles'),
+        'description' => t('Configuration for the module containing the block of image Tiles'),
         'page callback' => 'drupal_get_form',
         'page arguments' => array('tocctiles_config_form'),
-        'title' => 'TOCC Tiles',
         'access arguments' => array('access administration pages tocctiles'),
         'type' => MENU_LOCAL_TASK,
         'file' => 'tocctiles_admin.inc',
-        'weight' => '40'
-    )
+    );
             
     return $items;
 }
 
 /**
  * Implements hook_permission()
+ * 
+ * @return array
  */
 function tocctiles_permission()
 {
     return array(
-        'tocctiles' => array(
-            'title' => 'Manage the TOCC Tiles module',
-            'description' => t('Allows users to configure the TOCC Tiles module')
+        'administer tocctiles' => array(
+            'title' => t('Manage the TOCC Tiles module'),
+            'description' => t('Allows users to configure the TOCC Tiles module'),
         )
     );
 }
 
+/**
+ * Implements hook_theme()
+ */
 function tocctiles_theme($existing, $type, $theme, $path)
 {
     return array(
@@ -49,11 +61,15 @@ function tocctiles_theme($existing, $type, $theme, $path)
             ),
             'template' => 'templates/tocctiles.block'
         ),
-        'tocctiles' => array(
+        'tocctile' => array(
             'variables' => array(
-                'tile' => NULL
+                'image' => NULL,
+                'title' => NULL,
+                'description' => NULL,
+                'buttontext' => NULL,
+                'link' => NULL
             ),
-            'template' => 'templates/tocctiles'
+            'template' => 'templates/tocctile'
         )
     );
 }

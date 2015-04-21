@@ -2,6 +2,8 @@
 
 /**
  * Implements hook_form()
+ * 
+ * @return array
  */
 function tocctiles_config_form()
 {
@@ -9,6 +11,8 @@ function tocctiles_config_form()
         '#type' => 'fieldset',
         '#title' => t('TOCC Tiles config')
     );
+    
+    // Controls for the numbered of tiled images will go here
     
     $form['submit'] = array(
         '#type' => 'submit',
