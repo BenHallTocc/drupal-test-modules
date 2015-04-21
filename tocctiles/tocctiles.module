@@ -1,0 +1,59 @@
+<?php
+
+require_once dirname(__FILE__) . '/tocctiles.admin.inc';
+require_once dirname(__FILE__) . '/tocctiles.block.inc';
+require_once dirname(__FILE__) . '/tocctiles.taxonomy.inc';
+
+/**
+ * Implements hook_menu()
+ * 
+ * @return array
+ */
+function tocctiles_menu()
+{
+    $items = array();
+    
+    $items['admin/config/tocc/tocctiles'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('tocctiles_config_form'),
+        'title' => 'TOCC Tiles',
+        'access arguments' => array('access administration pages tocctiles'),
+        'type' => MENU_LOCAL_TASK,
+        'file' => 'tocctiles_admin.inc',
+        'weight' => '40'
+    )
+            
+    return $items;
+}
+
+/**
+ * Implements hook_permission()
+ */
+function tocctiles_permission()
+{
+    return array(
+        'tocctiles' => array(
+            'title' => 'Manage the TOCC Tiles module',
+            'description' => t('Allows users to configure the TOCC Tiles module')
+        )
+    );
+}
+
+function tocctiles_theme($existing, $type, $theme, $path)
+{
+    return array(
+        'tocctiles_block' => array(
+            'variables' => array(
+                'content' => NULL,
+                'tiles' => NULL
+            ),
+            'template' => 'templates/tocctiles.block'
+        ),
+        'tocctiles' => array(
+            'variables' => array(
+                'tile' => NULL
+            ),
+            'template' => 'templates/tocctiles'
+        )
+    );
+}

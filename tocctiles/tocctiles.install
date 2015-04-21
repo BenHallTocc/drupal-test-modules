@@ -1,0 +1,191 @@
+<?php
+
+/**
+ * Implement hook_install()
+ * 
+ * @return void
+ */
+function tocctiles_install()
+{
+    // Create a taxonomy for TOCC Tiles
+    foreach (tocctiles_get_taxonomies() as $key => $val) {
+        taxonomy_vocabulary_save(
+                (object) array_merge($val, array('machine_name' => $key))
+        );
+    }
+    
+    // Add taxonomy fields
+    field_info_cache_clear();
+    tocctiles_add_custom_taxonomy_fields();
+}
+
+/**
+ * Return the taxonomy defintions
+ * 
+ * @return array
+ */
+function tocctiles_get_taxonomies()
+{
+    return array(
+        'tocctile' => array(
+            'name' => 'Original Cottages Image Tiles',
+            'description' => 'Allows uploading of image tile(s) to block.'
+        )
+    );
+}
+
+/**
+ * Install custom taxonomy fields
+ * 
+ * @return void
+ */
+function tocctiles_add_custom_taxonomy_fields()
+{
+    foreach (tocctiles_installed_taxonomy_fields() as $fields)
+    {
+        foreach ($fields as $field) {
+            field_create_field($field);
+        }
+    }
+    
+    foreach (tocctiles_installed_taxonomy_fields() as $bundle => $fields) {
+        foreach ($fields as $fieldinstance) {
+            $fieldinstance['entity_type'] = 'taxonomy_term';
+            $fieldinstance['bundle'] = $bundle;
+            field_create_instance($fieldinstance);
+        }
+    }
+}
+
+/**
+ * Returns the taxonomy field descriptions
+ * 
+ * @return array
+ */
+function tocctiles_installed_taxonomy_fields()
+{
+    $t = get_t();
+    
+    return array(
+        'tocctile' => array(
+            'tocctile_image' => array(
+                'field_name' => 'tocctile_image',
+                'label' => $t('Image'),
+                'description' => $t('This is the main background image of ' . 
+                                    'the tile.'),
+                'type' => 'image',
+                'widget' => array(
+                    'type' => 'image'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'image'
+                    )
+                ),
+                'settings' => array(
+                    'alt_field' => true,
+                    'title_field' => true
+                )
+            ),
+            'tocctile_description' => array(
+                'field_name' => 'tocctile_description',
+                'label' => $t('Description'),
+                'description' => $t('This is the paragraph of text displayed ' . 
+                                    'on hover state.'),
+                'type' => 'textfield',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '250'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )               
+            ),
+            'tocctile_buttontext' => array(
+                'field_name' => 'tocctile_buttontext',
+                'label' => $t('Button Text'),
+                'description' => $t('CTA text displayed on hover state.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '20'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'default_value' => 'Click Here',
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            ),
+            'tocctile_link' => array(
+                'field_name' => 'tocctile_link',
+                'label' => $t('Link'),
+                'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
+                                    'be used as this will be passed through ' . 
+                                    'the url() function.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '50'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            )      
+        )
+    );
+}
+
+/**
+ * Implements hook_uninstall()
+ * 
+ * @return void
+ */
+function tocctiles_uninstall()
+{
+    // Delete the all taxonomy vocabulary
+    foreach (tocctiles_get_taxonomies() as $taxname => $detail) {
+        $vocab = taxonomy_vocabulary_machine_name_load($taxname);
+        taxonomy_vocabulary_delete($vocab->vid);
+    }
+    
+    // Remove taxonomy & content fields
+    foreach (array_keys(tocctiles_installed_taxonomy_fields()) as $field)
+    {
+        field_delete_field($field);
+    }
+    
+    // Remove field instance
+    foreach (tocctiles_get_taxonomies() as $taxname => $detail)
+    {
+        $instances = field_info_instances('taxonomy_term', $taxname);
+        foreach ($instances as $fieldinstance)
+        {
+            field_delete_instance($fieldinstance);
+        }
+    }
+}

@@ -1,0 +1,12 @@
+name = TOCC Tiles
+description = Provides a taxonomy & block for a configurable gallery of image 'tiles' with information overlay
+package = TOCC
+core = 7.x
+version = "7.x-0.x-dev"
+configure = admin/config/tocctiles
+
+files[] = tocctiles.admin.inc
+files[] = tocctiles.block.inc
+files[] = tocctiles.install
+files[] = tocctiles.module
+files[] = tocctiles.taxonomy.inc
