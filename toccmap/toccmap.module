@@ -1,0 +1,40 @@
+<?php
+
+require_once dirname(__FILE__) . '/toccmap.admin.inc';
+//require_once dirname(__FILE__) . '/toccmap.block.inc';
+//require_once dirname(__FILE__) . '/toccmap.taxonomy.inc';
+
+/**
+ * Implements hook_menu()
+ * 
+ * @return array
+ */
+function toccmap_menu()
+{   
+    $items['admin/config/toccmap'] = array(
+        'title' => t('TOCC Map'),
+        'description' => t('Configuration for the module containing the TOCC Map Search block'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('toccmap_config_form'),
+        'access arguments' => array('access administration pages toccmap'),
+        'type' => MENU_LOCAL_TASK,
+        'file' => 'toccmap.admin.inc',
+    );
+            
+    return $items;
+}
+
+/**
+ * Implements hook_permission()
+ * 
+ * @return array
+ */
+function toccmap_permission()
+{
+    return array(
+        'administer toccmap' => array(
+            'title' => t('Administer the TOCC Map module'),
+            'description' => t('Allows edit access to the TOCC Map module'),
+        )
+    );
+}

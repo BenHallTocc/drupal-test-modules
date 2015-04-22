@@ -1,0 +1,9 @@
+name = TOCC Map
+description = Provides a taxonomy & block for a new TOCC map search
+package = TOCC
+core = 7.x
+version = "7.x-0.x-dev"
+configure = admin/config/toccmap
+
+files[] = toccmap.module
+files[] = toccmap.admin.inc
