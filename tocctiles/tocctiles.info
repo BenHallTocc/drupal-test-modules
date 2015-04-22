@@ -3,7 +3,7 @@ description = Provides a taxonomy & block for a configurable gallery of image 't
 package = TOCC
 core = 7.x
 version = "7.x-0.x-dev"
-configure = admin/config//tocc/tocctiles
+configure = admin/config/tocctiles
 
 files[] = tocctiles.admin.inc
 files[] = tocctiles.block.inc
