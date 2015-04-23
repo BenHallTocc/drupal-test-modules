@@ -1,0 +1,9 @@
+name = TOCC Quote of the Day
+description = Provides a taxonomy & block that displays a randomly selected 'Quote of the Day'
+package = TOCC
+core = 7.x
+version = "7.x-0.x-dev"
+configure = admin/config/toccquoteoftheday
+
+files[] = toccquoteoftheday.module
+files[] = toccquoteoftheday.admin.inc

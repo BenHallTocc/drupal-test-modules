@@ -1,0 +1,40 @@
+<?php
+
+require_once dirname(__FILE__) . '/toccquoteoftheday.admin.inc';
+
+/**
+ * Implements hook_menu()
+ * 
+ * @return array
+ */
+function toccquoteoftheday_menu()
+{   
+    $items['admin/config/toccquoteoftheday'] = array(
+        'title' => t('TOCC Quote of the Day'),
+        'description' => t('Configuration for the module containing the TOCC ' .
+                           'Quote of the Day block'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('toccquoteoftheday_config_form'),
+        'access arguments' => array('access administration pages toccquoteoftheday'),
+        'type' => MENU_LOCAL_TASK,
+        'file' => 'toccquoteoftheday.admin.inc',
+    );
+            
+    return $items;
+}
+
+/**
+ * Implements hook_permission()
+ * 
+ * @return array
+ */
+function toccquoteoftheday_permission()
+{
+    return array(
+        'administer toccquoteoftheday' => array(
+            'title' => t('Administer the TOCC Quote of the Day module'),
+            'description' => t('Allows edit access to the TOCC Quote of ' .
+                               'the Day module'),
+        )
+    );
+}
