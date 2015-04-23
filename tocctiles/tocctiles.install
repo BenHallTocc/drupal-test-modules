@@ -15,7 +15,6 @@ function tocctiles_install()
     }
     
     // Add taxonomy fields
-    field_info_cache_clear();
     tocctiles_add_custom_taxonomy_fields();
 }
 

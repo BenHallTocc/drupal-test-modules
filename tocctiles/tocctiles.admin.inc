@@ -12,19 +12,6 @@ function tocctiles_config_form()
         '#title' => t('TOCC Tiles config')
     );
     
-    $form['config']['tocctiles_num_tiles'] = array(
-        '#type' => 'select',
-        '#title' => t('Number of Tiles'),
-        '#description' => 'The number of tiles displayed in the block',
-        '#default_value' => variable_get('tocctiles_num_tiles', '2'),
-        '#options' => array(
-            '2' => t('2'),
-            '4' => t('4'),
-            '6' => t('6'),
-            '8' => t('8')
-        )
-    );
-    
     /*$form['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Save')
