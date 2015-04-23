@@ -93,7 +93,7 @@ function toccmap_installed_taxonomy_fields()
                 'label' => $t('Description'),
                 'description' => $t('This is the paragraph of text displayed ' . 
                                     'on hover state.'),
-                'type' => 'textfield',
+                'type' => 'text',
                 'widget' => array(
                     'active' => 1,
                     'module' => 'text',
