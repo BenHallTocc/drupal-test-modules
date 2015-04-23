@@ -15,7 +15,6 @@ function toccmap_install()
     }
     
     // Add taxonomy fields
-    field_info_cache_clear();
     toccmap_add_custom_taxonomy_fields();
 }
 
@@ -89,8 +88,8 @@ function toccmap_installed_taxonomy_fields()
                     'title_field' => true
                 )
             ),
-            'tocctile_description' => array(
-                'field_name' => 'tocctile_description',
+            'toccmaparea_description' => array(
+                'field_name' => 'toccmaparea_description',
                 'label' => $t('Description'),
                 'description' => $t('This is the paragraph of text displayed ' . 
                                     'on hover state.'),
@@ -111,10 +110,10 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )               
             ),
-            'tocctile_buttontext' => array(
-                'field_name' => 'tocctile_buttontext',
-                'label' => $t('Button Text'),
-                'description' => $t('CTA text displayed on hover state.'),
+            'toccmaparea_linktitle' => array(
+                'field_name' => 'toccmaparea_linktitle',
+                'label' => $t('Link Title'),
+                'description' => $t('Anchor text of link.'),
                 'type' => 'text',
                 'widget' => array(
                     'active' => 1,
@@ -125,7 +124,6 @@ function toccmap_installed_taxonomy_fields()
                     'type' => 'text_textfield'
                 ),
                 'required' => true,
-                'default_value' => 'Click Here',
                 'display' => array(
                     'default' => array(
                         'label' => 'hidden',
@@ -133,8 +131,8 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )
             ),
-            'tocctile_link' => array(
-                'field_name' => 'tocctile_link',
+            'toccmaparea_link' => array(
+                'field_name' => 'toccmaparea_link',
                 'label' => $t('Link'),
                 'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
                                     'be used as this will be passed through ' . 
@@ -155,7 +153,26 @@ function toccmap_installed_taxonomy_fields()
                         'type' => 'text'
                     )
                 )
-            )      
+            ),
+            'toccmaparea_coordinates' => array(
+                'field_name' => 'toccmaparea_coordinates',
+                'label' => $t('Coordinates'),
+                'description' => $t('These are the hotspot coordinates of ' .
+                                    'the area on the map.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'type' => 'text_textfield',
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            )
         )
     );
 }
@@ -165,22 +182,22 @@ function toccmap_installed_taxonomy_fields()
  * 
  * @return void
  */
-function tocctiles_uninstall()
+function toccmap_uninstall()
 {
     // Delete the all taxonomy vocabulary
-    foreach (tocctiles_get_taxonomies() as $taxname => $detail) {
+    foreach (toccmap_get_taxonomies() as $taxname => $detail) {
         $vocab = taxonomy_vocabulary_machine_name_load($taxname);
         taxonomy_vocabulary_delete($vocab->vid);
     }
     
     // Remove taxonomy & content fields
-    foreach (array_keys(tocctiles_installed_taxonomy_fields()) as $field)
+    foreach (array_keys(toccmap_installed_taxonomy_fields()) as $field)
     {
         field_delete_field($field);
     }
     
     // Remove field instance
-    foreach (tocctiles_get_taxonomies() as $taxname => $detail)
+    foreach (toccmap_get_taxonomies() as $taxname => $detail)
     {
         $instances = field_info_instances('taxonomy_term', $taxname);
         foreach ($instances as $fieldinstance)

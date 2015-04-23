@@ -7,3 +7,6 @@ configure = admin/config/toccmap
 
 files[] = toccmap.module
 files[] = toccmap.admin.inc
+files[] = toccmap.install
+files[] = toccmap.block.inc
+files[] = toccmap.taxonomy.inc
