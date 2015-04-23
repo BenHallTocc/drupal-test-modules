@@ -17,7 +17,7 @@ function toccmap_config_form()
         '#value' => t('Save')
     );*/
     
-    return system_settings_form($form);  // Not interacting with API!
+    return $form;  
 }
 
 /**

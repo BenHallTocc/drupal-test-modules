@@ -5,6 +5,8 @@ core = 7.x
 version = "7.x-0.x-dev"
 configure = admin/config/toccmap
 
+dependencies[] = tabs_api
+
 files[] = toccmap.module
 files[] = toccmap.admin.inc
 files[] = toccmap.install
