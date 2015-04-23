@@ -5,6 +5,8 @@ core = 7.x
 version = "7.x-0.x-dev"
 configure = admin/config/tocctiles
 
+dependencies[] = tabs_api
+
 files[] = tocctiles.admin.inc
 files[] = tocctiles.block.inc
 files[] = tocctiles.install

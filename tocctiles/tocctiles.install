@@ -26,7 +26,7 @@ function tocctiles_install()
 function tocctiles_get_taxonomies()
 {
     return array(
-        'tocctile' => array(
+        'tocctiles' => array(
             'name' => 'Original Cottages Image Tiles',
             'description' => 'Allows uploading of image tile(s) to block.'
         )
@@ -66,9 +66,9 @@ function tocctiles_installed_taxonomy_fields()
     $t = get_t();
     
     return array(
-        'tocctile' => array(
-            'tocctile_image' => array(
-                'field_name' => 'tocctile_image',
+        'tocctiles' => array(
+            'tocctiles_image' => array(
+                'field_name' => 'tocctiles_image',
                 'label' => $t('Image'),
                 'description' => $t('This is the main background image of ' . 
                                     'the tile.'),
@@ -88,8 +88,8 @@ function tocctiles_installed_taxonomy_fields()
                     'title_field' => true
                 )
             ),
-            'tocctile_description' => array(
-                'field_name' => 'tocctile_description',
+            'tocctiles_description' => array(
+                'field_name' => 'tocctiles_description',
                 'label' => $t('Description'),
                 'description' => $t('This is the paragraph of text displayed ' . 
                                     'on hover state.'),
@@ -110,8 +110,8 @@ function tocctiles_installed_taxonomy_fields()
                     )
                 )               
             ),
-            'tocctile_buttontext' => array(
-                'field_name' => 'tocctile_buttontext',
+            'tocctiles_buttontext' => array(
+                'field_name' => 'tocctiles_buttontext',
                 'label' => $t('Button Text'),
                 'description' => $t('CTA text displayed on hover state.'),
                 'type' => 'text',
@@ -132,8 +132,8 @@ function tocctiles_installed_taxonomy_fields()
                     )
                 )
             ),
-            'tocctile_link' => array(
-                'field_name' => 'tocctile_link',
+            'tocctiles_link' => array(
+                'field_name' => 'tocctiles_link',
                 'label' => $t('Link'),
                 'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
                                     'be used as this will be passed through ' . 

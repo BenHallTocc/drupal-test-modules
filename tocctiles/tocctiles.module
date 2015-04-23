@@ -47,18 +47,18 @@ function tocctiles_theme($existing, $type, $theme, $path)
     return array(
         'tocctiles_block' => array(
             'variables' => array(
-                'content' => NULL,
+                'title' => NULL,
                 'tiles' => NULL
             ),
             'template' => 'templates/tocctiles.block'
         ),
         'tocctile' => array(
             'variables' => array(
-                'image' => NULL,
-                'title' => NULL,
-                'description' => NULL,
-                'buttontext' => NULL,
-                'link' => NULL
+                'name' => '',
+                'image' => '',
+                'description' => '',
+                'buttontext' => '',
+                'link' => ''
             ),
             'template' => 'templates/tocctile'
         )

@@ -24,21 +24,56 @@ function tocctiles_block_info()
 function tocctiles_block_view($delta = '')
 {
     $block = array();
+    $title = '';
     
     switch($delta) {
         case 'tocctiles_block':
-            $image = get_test_image_1();  // Test!
-            //$tile = get_test_tile_1();
+            $title = db_query(
+                    "SELECT title FROM {block} where delta='" . $delta . "' and `status`=1"
+            )->fetchField();
+            break;
+    }
+        
+    switch($delta) {
+        case 'tocctiles_block':
+            $tiles = tabs_api_get_vocabulary('tocctiles');
+            $tiles_themed = array();
             
-            $block['content'] = theme('image', $image);  // Uses Test image!
-            
-            /*$block['content']['#markup'] = theme(
-                    $delta,
+            foreach ($tiles as $taxid => $field) {               
+                $name = $field->name->value();
+                $image = $field->tocctiles_image->value();
+                $description = $field->tocctiles_description->value();
+                $buttontext = $field->tocctiles_buttontext->value();
+                $link = $field->tocctiles_link->value();
+                
+                $tiles_themed[] = theme(
+                    'tocctile',
                     array(
-                        'content' => 'tocctiles_block',
-                        //'tiles' => tocctiles_get_tiles()
+                        'name' => $name,
+                        'image' => theme(
+                                'image',
+                                array_merge(
+                                    $image,
+                                    array(
+                                        'path' => file_create_url($image['uri'])
+                                    )
+                                )
+                        ),
+                        'description' => $description,
+                        'buttontext' => $buttontext,
+                        'link' => $link
                     )
-            );*/
+                );
+            }
+            
+            $block['subject'] = t('TOCC Tiles: Block');
+            $block['content']['#markup'] = theme(
+                $delta,
+                array(
+                    'title' => $title,
+                    'tiles' => $tiles_themed
+                )
+            );
             
             break;
     }
