@@ -1,6 +1,6 @@
 #TOCC Tiles
 
-The goal of the 'TOCC Tiles' module is to produce a configurable gallery of
+The goal of the 'TOCC Tiles' module is to produce a gallery of
 image 'tiles' that can populate a drupal block to then be placed on 
 particular pages on our templated websites.
 
@@ -16,7 +16,3 @@ fields:
 * Description
 * Button Text
 * Link
-
-The desired functionality of the gallery would be to allow the number of tiles
-displayed to be configured. The user should be allowed to choose between
-displaying 2, 4, 6, or 8 tiles.
