@@ -12,12 +12,6 @@ function toccmap_config_form()
         '#title' => t('TOCC Map config')
     );
     
-    $form['config']['toccmap_base_image'] = array(
-        '#type' => 'file',
-        '#title' => t('Map Base Image'),
-        '#default_value' => variable_get('toccmap_base_image', ''),
-    );
-    
     /*$form['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Save')
