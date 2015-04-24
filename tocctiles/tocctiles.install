@@ -154,7 +154,28 @@ function tocctiles_installed_taxonomy_fields()
                         'type' => 'text'
                     )
                 )
-            )      
+            ),
+            'tocctiles_visible' => array(
+                'field_name' => 'tocctiles_visible',
+                'label' => $t('Tile visible on the site?'),
+                'description' => $t('This needs to be ticked for the tile to ' .
+                                    'be published and visible on the site.'),
+                'type' => 'list_boolean',
+                'required' => false,
+                'widget' => array(
+                    'type' => 'options_onoff',
+                    'settings' => array(
+                        'display_label' => true
+                    )
+                ),
+                'cardinality' => 1,
+                'settings' => array(
+                    'allowed_values' => array(
+                        0 => '',
+                        1 => ''
+                    )
+                )
+            )
         )
     );
 }

@@ -8,7 +8,7 @@ configure = admin/config/tocctiles
 dependencies[] = tabs_api
 
 files[] = tocctiles.admin.inc
+files[] = tocctiles.module
 files[] = tocctiles.block.inc
 files[] = tocctiles.install
-files[] = tocctiles.module
 files[] = tocctiles.taxonomy.inc

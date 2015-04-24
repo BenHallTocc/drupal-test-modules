@@ -17,13 +17,13 @@ function tocctiles_config_form()
         '#value' => t('Save')
     );*/
     
-    return system_settings_form($form);  // Not interacting with API!
+    return $form;  
 }
 
 /**
  * Implements hook_form_submit()
  */
-/*function tocctiles_config_form_submit($form, $form_state)
+function tocctiles_config_form_submit($form, $form_state)
 {
     tabs_api_form_save($form, $form_state, 'tocctiles');
-}/*
+}

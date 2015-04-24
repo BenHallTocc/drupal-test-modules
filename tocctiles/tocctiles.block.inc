@@ -36,7 +36,7 @@ function tocctiles_block_view($delta = '')
         
     switch($delta) {
         case 'tocctiles_block':
-            $tiles = tabs_api_get_vocabulary('tocctiles');
+            $tiles = _tocctiles_get_tiles();
             $tiles_themed = array();
             
             foreach ($tiles as $taxid => $field) {               
@@ -77,78 +77,23 @@ function tocctiles_block_view($delta = '')
             
             break;
     }
-    /*
-    switch($delta) {
-        case 'tocctiles_block':
-            $path = drupal_get_path('module', 'tocctiles');
-            
-            $block['content']['#attached'] = array();
-            $block['content']['#attached']['css'] = array(
-                $path . '/css/tocctiles.block.css'
-            );
-            //$block['content']['#attached']['js'][] = $path . '/js/tocc.tiles.js';
-            
-            break;            
-    }*/
     
     return $block;
 }
+
+//--------------- Helper Methods ---------------//
 
 /**
  * Return the tiles taxonomy
  * 
  * @return array
  */
-/*function tocctiles_get_tiles()
+function _tocctiles_get_tiles()
 {
-    // Function needs completion so that it returns tiles....
-}*/
-
-//--------------- Helper Methods ---------------//
-
-/**
- * Returns a test image
- */
-function get_test_image_1()
-{
-    return array(
-        'path' => drupal_get_path('module', 'tocctiles') . '/test/test-img-1.jpg',
-        'alt' => 'test image 1',
-        'width' => '360',
-        'height' => '250',
-        'attributes' => array(
-            'class' => 'test-image',
-            'id' => 'test_image_1'
-        )
-    );
+    $tiles = tabs_api_get_vocabulary('tocctiles');
+    
+    return array_filter($tiles, function($ele) {
+        return $ele->tocctiles_visible->value() == 1;
+    });
 }
 
-/**
- * Returns a test image
- */
-function get_test_image_2()
-{
-    return array(
-        'path' => drupal_get_path('module', 'tocctiles') . '/test/test-img-2.jpg',
-        'alt' => 'test image 2',
-        'width' => '360',
-        'height' => '250',
-        'attributes' => array(
-            'class' => 'test-image',
-            'id' => 'test_image_2'
-        )
-    );
-}
-
-function get_test_tile_1()
-{
-    return array(
-        'image' => get_test_image_1(),
-        'title' => 'Luxury Properties',
-        'description' => 'We have many 5 Star properties available! ' .
-                         'Dont hesitate! See what we have to offer today ' .
-                         'by clicking on the image.',
-        'buttontext' => 'Discover More',
-        'link' => 'http://originalcottages.co.uk/'
-    );
-}
