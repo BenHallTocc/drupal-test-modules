@@ -16,3 +16,4 @@ fields:
 * Description
 * Button Text
 * Link
+* Visible on Site
