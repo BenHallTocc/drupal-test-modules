@@ -38,10 +38,10 @@ function toccquoteoftheday_block_view($delta = '')
         case 'toccquoteoftheday_block':
             $qotd = _toccquoteoftheday_get_quote();
                
-            $quote = $qotd->toccquoteoftheday_quote->value();
-            $signature = $qotd->toccquoteoftheday_quotee->value();
-            $location = $qotd->toccquoteoftheday_location->value();
-            $additional_info = $qotd->toccquoteoftheday_additonal_info->value();
+            $quote = $qotd->qotd_quote->value();
+            $signature = $qotd->qotd_quotee->value();
+            $location = $qotd->qotd_location->value();
+            $additional_info = $qotd->qotd_added_info->value();
             
             if(!$location == '') {
                 $signature = $signature . ', ' . $location . ' ';
@@ -51,7 +51,7 @@ function toccquoteoftheday_block_view($delta = '')
                 $signature = $signature . '- ' . $additional_info;
             }
             
-            $link = $qotd->toccquoteoftheday_link->value();
+            $link = $qotd->qotd_link->value();
                            
             $block['subject'] = t('TOCC Quote of the Day');
             $block['content']['#markup'] = theme(
@@ -81,7 +81,7 @@ function _toccquoteoftheday_get_quote()
 {
     $quotes = tabs_api_get_vocabulary('toccquoteoftheday');
     $active_quotes = array_filter($quotes, function($ele) {
-        return $ele->toccquoteoftheday_active->value() == 1;
+        return $ele->qotd_active->value() == 1;
     });
     
     return array_rand($active_quotes, 1);

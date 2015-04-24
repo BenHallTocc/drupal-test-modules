@@ -67,8 +67,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
     
     return array(
         'toccquoteoftheday' => array(
-            'toccquoteoftheday_quote' => array(
-                'field_name' => 'toccquoteoftheday_quote',
+            'qotd_quote' => array(
+                'field_name' => 'qotd_quote',
                 'label' => $t('Quote'),
                 'description' => $t('This is the main body of the quote.'),
                 'type' => 'text',
@@ -88,8 +88,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
                     )
                 )
             ),
-            'toccquoteoftheday_quotee' => array(
-                'field_name' => 'toccquoteoftheday_quotee',
+            'qotd_quotee' => array(
+                'field_name' => 'qotd_quotee',
                 'label' => $t('Quotee'),
                 'description' => $t('This is the person (or persons) to whom ' .
                                     'the quote is attributed.'),
@@ -110,8 +110,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
                     )
                 )               
             ),
-            'toccquoteoftheday_location' => array(
-                'field_name' => 'toccquoteoftheday_location',
+            'qotd_location' => array(
+                'field_name' => 'qotd_location',
                 'label' => $t('Location'),
                 'description' => $t('Location of quotee(s) if relevant.'),
                 'type' => 'text',
@@ -132,8 +132,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
                     )
                 )
             ),
-            'toccquoteoftheday_additional_info' => array(
-                'field_name' => 'toccquoteoftheday_additional_info',
+            'qotd_added_info' => array(
+                'field_name' => 'qotd_added_info',
                 'label' => $t('Additional Information'),
                 'description' => $t('Any relevant additional information ' .
                                     'to be added to the quotes signature.'),
@@ -155,8 +155,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
                     )
                 )                
             ),
-            'toccquoteoftheday_link' => array(
-                'field_name' => 'toccquoteoftheday_link',
+            'qotd_link' => array(
+                'field_name' => 'qotd_link',
                 'label' => $t('Link'),
                 'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
                                     'be used as this will be passed through ' . 
@@ -178,8 +178,8 @@ function toccquoteoftheday_installed_taxonomy_fields()
                     )
                 )
             ),
-            'toccquoteoftheday_active' => array(
-                'field_name' => 'toccquoteoftheday_active',
+            'qotd_active' => array(
+                'field_name' => 'qotd_active',
                 'label' => $t('Active Quote?'),
                 'description' => $t('This needs to be ticked for the quote to ' .
                                     'be active and potentially included as ' .
