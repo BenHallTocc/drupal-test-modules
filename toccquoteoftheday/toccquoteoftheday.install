@@ -1,0 +1,235 @@
+<?php
+
+/**
+ * Implement hook_install()
+ * 
+ * @return void
+ */
+function toccquoteoftheday_install()
+{
+    // Create a taxonomy for TOCC Quotes
+    foreach (toccquoteoftheday_get_taxonomies() as $key => $val) {
+        taxonomy_vocabulary_save(
+                (object) array_merge($val, array('machine_name' => $key))
+        );
+    }
+    
+    // Add taxonomy fields
+    toccquoteoftheday_add_custom_taxonomy_fields();
+}
+
+/**
+ * Return the taxonomy defintions
+ * 
+ * @return array
+ */
+function toccquoteoftheday_get_taxonomies()
+{
+    return array(
+        'toccquoteoftheday' => array(
+            'name' => 'Original Cottages Quotes',
+            'description' => 'Allows uploading of a Quote of the Day to a block.'
+        )
+    );
+}
+
+/**
+ * Install custom taxonomy fields
+ * 
+ * @return void
+ */
+function toccquoteoftheday_add_custom_taxonomy_fields()
+{
+    foreach (toccquoteoftheday_installed_taxonomy_fields() as $fields)
+    {
+        foreach ($fields as $field) {
+            field_create_field($field);
+        }
+    }
+    
+    foreach (toccquoteoftheday_installed_taxonomy_fields() as $bundle => $fields) {
+        foreach ($fields as $fieldinstance) {
+            $fieldinstance['entity_type'] = 'taxonomy_term';
+            $fieldinstance['bundle'] = $bundle;
+            field_create_instance($fieldinstance);
+        }
+    }
+}
+
+/**
+ * Returns the taxonomy field descriptions
+ * 
+ * @return array
+ */
+function toccquoteoftheday_installed_taxonomy_fields()
+{
+    $t = get_t();
+    
+    return array(
+        'toccquoteoftheday' => array(
+            'toccquoteoftheday_quote' => array(
+                'field_name' => 'toccquoteoftheday_quote',
+                'label' => $t('Quote'),
+                'description' => $t('This is the main body of the quote.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '140'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            ),
+            'toccquoteoftheday_quotee' => array(
+                'field_name' => 'toccquoteoftheday_quotee',
+                'label' => $t('Quotee'),
+                'description' => $t('This is the person (or persons) to whom ' .
+                                    'the quote is attributed.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '100'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )               
+            ),
+            'toccquoteoftheday_location' => array(
+                'field_name' => 'toccquoteoftheday_location',
+                'label' => $t('Location'),
+                'description' => $t('Location of quotee(s) if relevant.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '50'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => false,
+                'default_value' => '',
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            ),
+            'toccquoteoftheday_additional_info' => array(
+                'field_name' => 'toccquoteoftheday_additional_info',
+                'label' => $t('Additional Information'),
+                'description' => $t('Any relevant additional information ' .
+                                    'to be added to the quotes signature.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '50'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => false,
+                'default_value' => '',
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )                
+            ),
+            'toccquoteoftheday_link' => array(
+                'field_name' => 'toccquoteoftheday_link',
+                'label' => $t('Link'),
+                'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
+                                    'be used as this will be passed through ' . 
+                                    'the url() function.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '50'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => true,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            ),
+            'toccquoteoftheday_active' => array(
+                'field_name' => 'toccquoteoftheday_active',
+                'label' => $t('Active Quote?'),
+                'description' => $t('This needs to be ticked for the quote to ' .
+                                    'be active and potentially included as ' .
+                                    'a Quote of the Day'),
+                'type' => 'list_boolean',
+                'required' => false,
+                'widget' => array(
+                    'type' => 'options_onoff',
+                    'settings' => array(
+                        'display_label' => true
+                    )
+                ),
+                'cardinality' => 1,
+                'settings' => array(
+                    'allowed_values' => array(
+                        0 => '',
+                        1 => ''
+                    )
+                )
+            )
+        )
+    );
+}
+
+/**
+ * Implements hook_uninstall()
+ * 
+ * @return void
+ */
+function toccquoteoftheday_uninstall()
+{
+    // Delete the all taxonomy vocabulary
+    foreach (toccquoteoftheday_get_taxonomies() as $taxname => $detail) {
+        $vocab = taxonomy_vocabulary_machine_name_load($taxname);
+        taxonomy_vocabulary_delete($vocab->vid);
+    }
+    
+    // Remove taxonomy & content fields
+    foreach (array_keys(toccquoteoftheday_installed_taxonomy_fields()) as $field)
+    {
+        field_delete_field($field);
+    }
+    
+    // Remove field instance
+    foreach (toccquoteoftheday_get_taxonomies() as $taxname => $detail)
+    {
+        $instances = field_info_instances('taxonomy_term', $taxname);
+        foreach ($instances as $fieldinstance)
+        {
+            field_delete_instance($fieldinstance);
+        }
+    }
+}

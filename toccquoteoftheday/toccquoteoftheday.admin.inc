@@ -23,7 +23,7 @@ function toccquoteoftheday_config_form()
 /**
  * Implements hook_form_submit()
  */
-/*function toccquoteoftheday_config_form_submit($form, $form_state)
+function toccquoteoftheday_config_form_submit($form, $form_state)
 {
     tabs_api_form_save($form, $form_state, 'toccquoteoftheday');
-}*/
+}
