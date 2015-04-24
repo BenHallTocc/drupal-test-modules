@@ -50,11 +50,19 @@ function toccquoteoftheday_theme($existing, $type, $theme, $path)
         'toccquoteoftheday_block' => array(
             'variables' => array(
                 'title' => '',
-                'quote' => '',
-                'signature' => '',
-                'link' => ''
+                'quotes' => ''
             ),
             'template' => 'templates/toccquoteoftheday.block'
+        ),
+        'toccquote' => array(
+            'variables' => array(
+                'quote' => '',
+                'quotee' => '',
+                'location' => '',
+                'added_info' => '',
+                'link' => ''
+            ),
+            'template' => 'templates/toccquoteoftheday'
         )
     );
 }

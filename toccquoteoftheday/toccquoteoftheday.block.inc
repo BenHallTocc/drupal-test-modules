@@ -36,31 +36,34 @@ function toccquoteoftheday_block_view($delta = '')
         
     switch($delta) {
         case 'toccquoteoftheday_block':
-            $qotd = _toccquoteoftheday_get_quote();
-               
-            $quote = $qotd->qotd_quote->value();
-            $signature = $qotd->qotd_quotee->value();
-            $location = $qotd->qotd_location->value();
-            $additional_info = $qotd->qotd_added_info->value();
+            $quotes = _toccquoteoftheday_get_quotes();
+            $quotes_themed = array();
             
-            if(!$location == '') {
-                $signature = $signature . ', ' . $location . ' ';
+            foreach ($quotes as $taxid => $field) {
+                $quote = $field->qotd_quote->value();
+                $quotee = $field->qotd_quotee->value();
+                $location = $field->qotd_location->value();
+                $added_info = $field->qotd_added_info->value();
+                $link = $field->qotd_link->value();
+                
+                $quotes_themed[] = theme(
+                    'toccquote',
+                    array(
+                        'quote' => $quote,
+                        'quotee' => $quotee,
+                        'location' => $location,
+                        'added_info' => $added_info,
+                        'link' => $link
+                    )
+                );
             }
             
-            if(!$additional_info == '') {
-                $signature = $signature . '- ' . $additional_info;
-            }
-            
-            $link = $qotd->qotd_link->value();
-                           
             $block['subject'] = t('TOCC Quote of the Day');
             $block['content']['#markup'] = theme(
                 $delta,
                 array(
                     'title' => $title,
-                    'quote' => $quote,
-                    'signature' => $signature,
-                    'link' => $link
+                    'quotes' => $quotes_themed
                 )
             );
             
@@ -73,17 +76,16 @@ function toccquoteoftheday_block_view($delta = '')
 //--------------- Helper Methods ---------------//
 
 /**
- * Return a quote from the taxonomy at random
+ * Return the Quotes taxonomy
  * 
  * @return array
  */
-function _toccquoteoftheday_get_quote()
+function _toccquoteoftheday_get_quotes()
 {
     $quotes = tabs_api_get_vocabulary('toccquoteoftheday');
-    $active_quotes = array_filter($quotes, function($ele) {
+    
+    return array_filter($quotes, function($ele) {
         return $ele->qotd_active->value() == 1;
     });
-    
-    return array_rand($active_quotes, 1);
 }
 
