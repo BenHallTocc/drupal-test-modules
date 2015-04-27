@@ -69,7 +69,7 @@ function toccmap_installed_taxonomy_fields()
         'toccmap' => array(
             'area_hoverimage' => array(
                 'field_name' => 'area_hoverimage',
-                'label' => $t('Image'),
+                'label' => $t('Hover Image'),
                 'description' => $t('This image is overlaid when the user ' .
                                     'hovers over the specific area.'),
                 'type' => 'image',
