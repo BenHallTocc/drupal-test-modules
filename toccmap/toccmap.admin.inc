@@ -12,10 +12,16 @@ function toccmap_config_form()
         '#title' => t('TOCC Map config')
     );
     
-    /*$form['submit'] = array(
+    $form['config']['toccmap_base_image'] = array(
+        '#type' => 'file',
+        '#title' => t('Map Base Image'),
+        '#description' => 'The main map image to be used as a base.'
+    );
+    
+    $form['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Save')
-    );*/
+    );
     
     return $form;  
 }
@@ -23,7 +29,7 @@ function toccmap_config_form()
 /**
  * Implements hook_form_submit()
  */
-/*function toccmap_config_form_submit($form, $form_state)
+function toccmap_config_form_submit($form, $form_state)
 {
     tabs_api_form_save($form, $form_state, 'toccmap');
-}*/
+}

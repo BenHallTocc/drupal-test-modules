@@ -1,8 +1,8 @@
 <?php
 
 require_once dirname(__FILE__) . '/toccmap.admin.inc';
-//require_once dirname(__FILE__) . '/toccmap.block.inc';
-//require_once dirname(__FILE__) . '/toccmap.taxonomy.inc';
+require_once dirname(__FILE__) . '/toccmap.block.inc';
+require_once dirname(__FILE__) . '/toccmap.taxonomy.inc';
 
 /**
  * Implements hook_menu()
@@ -35,6 +35,30 @@ function toccmap_permission()
         'administer toccmap' => array(
             'title' => t('Administer the TOCC Map module'),
             'description' => t('Allows edit access to the TOCC Map module'),
+        )
+    );
+}
+
+function toccmap_theme($existing, $type, $theme, $path)
+{
+    return array(
+        'toccmap_block' => array(
+            'variables' => array(
+                'title' => '',
+                'areas' => ''
+            ),
+            'template' => 'templates/toccmap.block'
+        ),
+        'toccmap_area' => array(
+            'variables' => array(
+                'name' => '',
+                'hoverimage' => NULL,
+                'description' => '',
+                'linktitle' => '',
+                'link' => '',
+                'coordinates' => ''
+            ),
+            'template' => 'templates/toccmap_area'
         )
     );
 }

@@ -66,11 +66,11 @@ function toccmap_installed_taxonomy_fields()
     $t = get_t();
     
     return array(
-        'toccmaparea' => array(
-            'toccmaparea_hoverimage' => array(
-                'field_name' => 'toccmaparea_hoverimage',
+        'toccmap' => array(
+            'area_hoverimage' => array(
+                'field_name' => 'area_hoverimage',
                 'label' => $t('Image'),
-                'description' => $t('This is image overlaid when the user ' .
+                'description' => $t('This image is overlaid when the user ' .
                                     'hovers over the specific area.'),
                 'type' => 'image',
                 'widget' => array(
@@ -88,8 +88,8 @@ function toccmap_installed_taxonomy_fields()
                     'title_field' => true
                 )
             ),
-            'toccmaparea_description' => array(
-                'field_name' => 'toccmaparea_description',
+            'area_description' => array(
+                'field_name' => 'area_description',
                 'label' => $t('Description'),
                 'description' => $t('This is the paragraph of text displayed ' . 
                                     'on hover state.'),
@@ -110,8 +110,8 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )               
             ),
-            'toccmaparea_linktitle' => array(
-                'field_name' => 'toccmaparea_linktitle',
+            'area_linktitle' => array(
+                'field_name' => 'area_linktitle',
                 'label' => $t('Link Title'),
                 'description' => $t('Anchor text of link.'),
                 'type' => 'text',
@@ -131,8 +131,8 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )
             ),
-            'toccmaparea_link' => array(
-                'field_name' => 'toccmaparea_link',
+            'area_link' => array(
+                'field_name' => 'area_link',
                 'label' => $t('Link'),
                 'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
                                     'be used as this will be passed through ' . 
@@ -142,7 +142,7 @@ function toccmap_installed_taxonomy_fields()
                     'active' => 1,
                     'module' => 'text',
                     'settings' => array(
-                        'size' => '50'
+                        'size' => '100'
                     ),
                     'type' => 'text_textfield'
                 ),
@@ -154,8 +154,8 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )
             ),
-            'toccmaparea_coordinates' => array(
-                'field_name' => 'toccmaparea_coordinates',
+            'area_coordinates' => array(
+                'field_name' => 'area_coordinates',
                 'label' => $t('Coordinates'),
                 'description' => $t('These are the hotspot coordinates of ' .
                                     'the area on the map.'),
