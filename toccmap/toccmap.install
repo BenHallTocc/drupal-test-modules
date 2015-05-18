@@ -102,7 +102,7 @@ function toccmap_installed_taxonomy_fields()
                     ),
                     'type' => 'text_textfield'
                 ),
-                'required' => true,
+                'required' => false,
                 'display' => array(
                     'default' => array(
                         'label' => 'hidden',
@@ -119,7 +119,7 @@ function toccmap_installed_taxonomy_fields()
                     'active' => 1,
                     'module' => 'text',
                     'settings' => array(
-                        'size' => '20'
+                        'size' => '50'
                     ),
                     'type' => 'text_textfield'
                 ),
@@ -134,7 +134,7 @@ function toccmap_installed_taxonomy_fields()
             'area_link' => array(
                 'field_name' => 'area_link',
                 'label' => $t('Link'),
-                'descritpion' => $t('Target for link. Drupal shortcuts can ' . 
+                'description' => $t('Target for link. Drupal shortcuts can ' . 
                                     'be used as this will be passed through ' . 
                                     'the url() function.'),
                 'type' => 'text',
@@ -159,13 +159,16 @@ function toccmap_installed_taxonomy_fields()
                 'label' => $t('Coordinates'),
                 'description' => $t('These are the hotspot coordinates of ' .
                                     'the area on the map.'),
-                'type' => 'text',
+                'type' => 'text_long',
+                'settings' => array(
+                   'max_length' => ''
+                ),
                 'widget' => array(
                     'active' => 1,
                     'module' => 'text',
-                    'type' => 'text_textfield',
+                    'type' => 'text_textarea',
                 ),
-                'required' => true,
+                'required' => false,
                 'display' => array(
                     'default' => array(
                         'label' => 'hidden',

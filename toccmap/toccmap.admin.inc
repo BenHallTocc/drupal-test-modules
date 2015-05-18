@@ -15,7 +15,8 @@ function toccmap_config_form()
     $form['config']['toccmap_base_image'] = array(
         '#type' => 'file',
         '#title' => t('Map Base Image'),
-        '#description' => 'The main map image to be used as a base.'
+        '#description' => 'The main map image to be used as a base.',
+        
     );
     
     $form['submit'] = array(
