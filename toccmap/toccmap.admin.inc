@@ -20,8 +20,6 @@ function toccmap_config_form()
         '#upload_location' => 'public://'
     );
     
-    
-    
     $form['config']['submit'] = array(
         '#type' => 'submit',
         '#value' => t('Save')

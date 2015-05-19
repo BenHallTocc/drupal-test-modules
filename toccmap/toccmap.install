@@ -27,7 +27,7 @@ function toccmap_get_taxonomies()
 {
     return array(
         'toccmap' => array(
-            'name' => 'Original Cottages Map Areas',
+            'name' => 'TOCC Map Areas',
             'description' => 'Allows addition of specific areas to be used on a TOCC Map.'
         )
     );
@@ -93,14 +93,14 @@ function toccmap_installed_taxonomy_fields()
                 'label' => $t('Description'),
                 'description' => $t('This is the paragraph of text displayed ' . 
                                     'on hover state.'),
-                'type' => 'text',
+                'type' => 'text_long',
+                'settings' => array(
+                   'max_length' => '500'
+                ),
                 'widget' => array(
                     'active' => 1,
                     'module' => 'text',
-                    'settings' => array(
-                        'size' => '250'
-                    ),
-                    'type' => 'text_textfield'
+                    'type' => 'text_textarea'
                 ),
                 'required' => false,
                 'display' => array(
@@ -119,7 +119,7 @@ function toccmap_installed_taxonomy_fields()
                     'active' => 1,
                     'module' => 'text',
                     'settings' => array(
-                        'size' => '50'
+                        'size' => '100'
                     ),
                     'type' => 'text_textfield'
                 ),
