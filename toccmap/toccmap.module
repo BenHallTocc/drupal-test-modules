@@ -44,28 +44,19 @@ function toccmap_theme($existing, $type, $theme, $path)
     return array(
         'toccmap_block' => array(
             'variables' => array(
-                'area_menu' => '',
-                'areas' => '',
-                'map_areas' => ''
+                'area_panels' => NULL,
             ),
             'template' => 'templates/toccmap.block'
         ),
-        'toccmap_area_info' => array(
+        'toccmap_area_panel' => array(
             'variables' => array(
-                'name' => '',
-                'description' => '',
-                'linktitle' => '',
-                'link' => '',
+                'image' => NULL,
+                'title' => NULL,
+                'desc' => NULL,
+                'link' => NULL,
+                'buttontext' => NULL,
             ),
-            'template' => 'templates/toccmap_area_info'
-        ),
-        'toccmap_map_area' => array(
-            'variables' => array(
-                'hoverimage' => '',
-                'link' => '',
-                'coordinates' => ''
-            ),
-            'template' => 'templates/toccmap_map_area'
+            'template' => 'templates/toccmap_area_panel'
         )
     );
 }

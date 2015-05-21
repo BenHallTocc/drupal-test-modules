@@ -67,32 +67,10 @@ function toccmap_installed_taxonomy_fields()
     
     return array(
         'toccmap' => array(
-            'area_hoverimage' => array(
-                'field_name' => 'area_hoverimage',
-                'label' => $t('Hover Image'),
-                'description' => $t('This image is overlaid when the user ' .
-                                    'hovers over the specific area.'),
-                'type' => 'image',
-                'widget' => array(
-                    'type' => 'image'
-                ),
-                'required' => true,
-                'display' => array(
-                    'default' => array(
-                        'label' => 'hidden',
-                        'type' => 'image'
-                    )
-                ),
-                'settings' => array(
-                    'alt_field' => true,
-                    'title_field' => true
-                )
-            ),
-            'area_description' => array(
-                'field_name' => 'area_description',
-                'label' => $t('Description'),
-                'description' => $t('This is the paragraph of text displayed ' . 
-                                    'on hover state.'),
+            'toccmap_areadesc' => array(
+                'field_name' => 'toccmap_areadesc',
+                'label' => $t('Area Description'),
+                'description' => $t('This is the text used in the area panel.'),
                 'type' => 'text_long',
                 'settings' => array(
                    'max_length' => '500'
@@ -110,39 +88,58 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )               
             ),
-            'area_linktitle' => array(
-                'field_name' => 'area_linktitle',
-                'label' => $t('Link Title'),
-                'description' => $t('Anchor text of link.'),
-                'type' => 'text',
+            'toccmap_areaimage' => array(
+                'field_name' => 'toccmap_areaimage',
+                'label' => $t('Area Image'),
+                'description' => $t('This image is used in the area panel.'),
+                'type' => 'image',
                 'widget' => array(
-                    'active' => 1,
-                    'module' => 'text',
-                    'settings' => array(
-                        'size' => '100'
-                    ),
-                    'type' => 'text_textfield'
+                    'type' => 'image'
                 ),
-                'required' => true,
+                'required' => false,
                 'display' => array(
                     'default' => array(
                         'label' => 'hidden',
-                        'type' => 'text'
+                        'type' => 'image'
                     )
+                ),
+                'settings' => array(
+                    'alt_field' => true,
+                    'title_field' => true,
+                    'file_extensions' => 'png gif jpg jpeg'
                 )
             ),
-            'area_link' => array(
-                'field_name' => 'area_link',
+            'toccmap_link' => array(
+                'field_name' => 'toccmap_link',
                 'label' => $t('Link'),
-                'description' => $t('Target for link. Drupal shortcuts can ' . 
-                                    'be used as this will be passed through ' . 
-                                    'the url() function.'),
+                'description' => $t('Target destination when the button is clicked.'),
                 'type' => 'text',
                 'widget' => array(
                     'active' => 1,
                     'module' => 'text',
                     'settings' => array(
-                        'size' => '100'
+                        'size' => '40'
+                    ),
+                    'type' => 'text_textfield'
+                ),
+                'required' => false,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'text'
+                    )
+                )
+            ),
+            'toccmap_buttontext' => array(
+                'field_name' => 'toccmap_buttontext',
+                'label' => $t('Button Text'),
+                'description' => $t('Text displayed on the CTA button.'),
+                'type' => 'text',
+                'widget' => array(
+                    'active' => 1,
+                    'module' => 'text',
+                    'settings' => array(
+                        'size' => '20'
                     ),
                     'type' => 'text_textfield'
                 ),
@@ -154,9 +151,31 @@ function toccmap_installed_taxonomy_fields()
                     )
                 )
             ),
-            'area_coordinates' => array(
-                'field_name' => 'area_coordinates',
-                'label' => $t('Coordinates'),
+            'toccmap_mapimage' => array(
+                'field_name' => 'toccmap_mapimage',
+                'label' => $t('Map Image'),
+                'description' => $t('This image is overlaid on top of the ' .
+                                    'area on the map.'),
+                'type' => 'image',
+                'widget' => array(
+                    'type' => 'image'
+                ),
+                'required' => false,
+                'display' => array(
+                    'default' => array(
+                        'label' => 'hidden',
+                        'type' => 'image'
+                    )
+                ),
+                'settings' => array(
+                    'alt_field' => true,
+                    'title_field' => true,
+                    'file_extensions' => 'png gif'
+                )
+            ),
+            'toccmap_mapcoords' => array(
+                'field_name' => 'toccmap_mapcoords',
+                'label' => $t('Map Coordinates'),
                 'description' => $t('These are the hotspot coordinates of ' .
                                     'the area on the map.'),
                 'type' => 'text_long',

@@ -37,50 +37,59 @@ function toccmap_block_view($delta = '')
     switch($delta) {
         case 'toccmap_block':
             $areas = tabs_api_get_vocabulary('toccmap');
-            $areas_menu = array();
-            $areas_info_themed = array();
-            $map_areas_themed = array();
             
-            foreach ($areas as $taxid => $field) {               
-                $name = $field->name->value();
-                $hoverimage = $field->area_hoverimage->value();
-                $description = $field->area_description->value();
-                $linktitle = $field->area_linktitle->value();
-                $link = $field->area_link->value();
-                $coordinates = $field->area_coordinates->value();
-                
-                $areas_menu[] = $name;
-                
-                $areas_info_themed[] = theme(
-                    'toccmap_area_info',
+            // 'Area Panels' are the blocks of content displayed for each area
+            $area_panels_themed = array();
+        
+            // Retrieving default info section content (see config screen)
+            $default_title = variable_get('toccmap_default_title', '');
+            $default_desc = variable_get('toccmap_default_desc', '');
+        
+            // Theming of default content if appropriate
+            if (($default_title && strlen($default_title) > 0)
+                    && ($default_desc && strlen($default_desc) > 0)) 
+            {
+                $area_panels_themed[] = theme(
+                    'toccmap_area_panel',
                     array(
-                        'name' => $name,
-                        'description' => $description,
-                        'linktitle' => $linktitle,
-                        'link' => $link,
-                    )
-                );
-                
-                $map_areas_themed[] = theme(
-                    'toccmap_map_area',
-                    array(
-                        'hoverimage' => file_create_url($hoverimage['uri']),                                  
-                        'link' => $link,
-                        'coordinates' => $coordinates
+                        'title' => $default_title,
+                        'desc' => $default_desc,
                     )
                 );
             }
+        
+            // Iterating through returned TOCC Map taxonomy
+            foreach ($areas as $taxid => $field) {
+                $image = $field->toccmap_areaimage->value();
+                $image_themed = theme(
+                        $image, 
+                        array_merge(
+                            $image,
+                            array(
+                                'path' => file_create_url($image['uri'])
+                            )
+                        )
+                );
             
+                $area_panels_themed[] = theme(
+                    'toccmap_area_panel',
+                    array(
+                        'image' => $image_themed,
+                        'title' => $field->name->value(),
+                        'desc' => $field->toccmap_areadesc->value(),
+                        'link' => $field->toccmap_link->value(),
+                        'buttontext' => $field->toccmap_buttontext->value()
+                    )
+                );
+            }
+        
             $block['subject'] = t('TOCC Map');
-            $block['content']['#markup'] = theme(
+            $block['content'] = theme(
                 $delta,
                 array(
-                    'area_menu' => $areas_menu,
-                    'areas_info' => $areas_info_themed,
-                    'map_areas' => $map_areas_themed
+                    'area_panels' => $area_panels_themed
                 )
             );
-            
             break;
     }
     
