@@ -2,6 +2,11 @@
 
 $area_panel = '';
 
+if ($image && strlen($image) > 0)
+{
+    $area_panel .= sprintf('%s', $image);
+}
+
 if ($title && strlen($title) > 0)
 {
     $area_panel .= sprintf('<span class="toccmap_area_panel_title"><h3>%s</h3>', $title);

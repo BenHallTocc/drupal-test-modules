@@ -62,7 +62,7 @@ function toccmap_block_view($delta = '')
             foreach ($areas as $taxid => $field) {
                 $image = $field->toccmap_areaimage->value();
                 $image_themed = theme(
-                        $image, 
+                        'image', 
                         array_merge(
                             $image,
                             array(

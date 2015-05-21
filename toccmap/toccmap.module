@@ -44,17 +44,17 @@ function toccmap_theme($existing, $type, $theme, $path)
     return array(
         'toccmap_block' => array(
             'variables' => array(
-                'area_panels' => NULL,
+                'area_panels' => '',
             ),
             'template' => 'templates/toccmap.block'
         ),
         'toccmap_area_panel' => array(
             'variables' => array(
-                'image' => NULL,
-                'title' => NULL,
-                'desc' => NULL,
-                'link' => NULL,
-                'buttontext' => NULL,
+                'image' => '',
+                'title' => '',
+                'desc' => '',
+                'link' => '',
+                'buttontext' => '',
             ),
             'template' => 'templates/toccmap_area_panel'
         )
